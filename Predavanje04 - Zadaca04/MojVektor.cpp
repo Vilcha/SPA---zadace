@@ -31,23 +31,25 @@ void MojVektor::push_back(float x)
 	numbers[vsize++] = x;
 }
 
-void MojVektor::insert(unsigned n, float x)
+void MojVektor::insert(unsigned index, float x)
 {
 	int counter = 0;
-	float* temp = new float[n];
-	if (cap == vsize)
+	float* temp = new float[vsize + 1];
+	if (vsize == cap)
 	{
-		for (unsigned i = 0; i < cap; i++)
+		grow();
+	}
+
+	for (unsigned i = 0; i < vsize + 1; i++)
+	{
+		if (i == index)
 		{
-			if (i == n)
-			{
-				temp[i] = x;
-			}
-			else
-			{
-				temp[i] = numbers[counter];
-				counter++;
-			}
+			temp[i] = x;
+		}
+		else
+		{
+			temp[i] = numbers[counter];
+			counter++;
 		}
 	}
 	vsize++;
